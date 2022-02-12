@@ -1,17 +1,5 @@
 # Changelog
 
-<a name="0.1.1"></a>
-## 0.1.1 (2021-10-08)
-
-### Changed
-
-- 🚨 precommit lints [[1180144](https://github.com/ptavares/zsh-tfswitch/commit/1180144893768f9e4ed8ced6cc6d1b668e1064b6)]
-
-### Removed
-
-- 🔥 remove unused code [[d1e852d](https://github.com/ptavares/zsh-tfswitch/commit/d1e852dc79af9e23cb9a1fe7a00c77dfc072d5d7)]
-
-
 <a name="0.1.0"></a>
 ## 0.1.0 (2021-10-08)
 
