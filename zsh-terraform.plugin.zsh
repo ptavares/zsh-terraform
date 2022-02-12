@@ -15,15 +15,6 @@ function tf_prompt_info() {
   echo "${ZSH_THEME_TF_PROMPT_PREFIX-[}${workspace:gs/%/%%}${ZSH_THEME_TF_PROMPT_SUFFIX-]}"
 }
 
-function tfws() {
-    if (( $# != 1 ))
-      then
-        echoArg "Usage:  $0 [workspace_name]"
-    else
-        tfw select "$1" || tfw new "$1" ;
-    fi
-}
-
 #################################
 # Define all lower levels aliases
 #################################
@@ -54,3 +45,17 @@ alias tfd!='tfd -auto-approve'
 alias tfid!='tfi && tfd!'
 # Utils
 alias tfversion='tf version'
+
+################################
+# Custom function
+################################
+function tfws() {
+    if (( $# != 1 ))
+      then
+        echo "> Usage:  $0 [workspace_name]"
+    else
+        count=$(find ./ -maxdepth 1 -type f -name '*.tf' | wc -l)
+        [[ -d .terraform &&  $count -gt 0 ]] ||  echo "> Not in terraform directory"
+        tfw select "$1" || tfw new "$1" ;
+    fi
+}
