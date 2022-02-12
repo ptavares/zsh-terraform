@@ -54,8 +54,12 @@ function tfws() {
       then
         echo "> Usage:  $0 [workspace_name]"
     else
-        count=$(find ./ -maxdepth 1 -type f -name '*.tf' | wc -l)
-        [[ -d .terraform &&  $count -gt 0 ]] ||  echo "> Not in terraform directory"
-        tfw select "$1" || tfw new "$1" ;
+        count=$(find $PWD -maxdepth 1 -type f -name '*.tf' | wc -l)
+        if (( $count <= 0 ))
+          then
+            echo "> Not in terraform directory"
+        else
+            tfw select "$1" || tfw new "$1"
+        fi
     fi
 }
