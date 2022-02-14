@@ -8,6 +8,11 @@ zsh plugin for Terraform, a tool from Hashicorp for managing infrastructure safe
 
 This plugins extends original oh-my-zsh plugin with aliases, functions and autocompletion.
 
+It will also install and load some useful tools :
+- [terraform-docs](https://github.com/terraform-docs/terraform-docs)
+- [tfsec](https://github.com/aquasecurity/tfsec)
+- [tflint](https://github.com/terraform-linters/tflint)
+
 ## Table of content
 
 _This documentation section is generated automatically_
