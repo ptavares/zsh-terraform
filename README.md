@@ -26,6 +26,7 @@ _This documentation section is generated automatically_
   - [Aliases](#aliases)
   - [Function](#function)
   - [Prompt function](#prompt-function)
+  - [Updating Terraform tools](#updating-terraform-tools)
   - [License](#license)
 
 <!--TOC-->
@@ -138,6 +139,15 @@ You can also specify the PREFIX and SUFFIX for the workspace with the following 
 ```sh
 ZSH_THEME_TF_PROMPT_PREFIX="%{$fg[white]%}"
 ZSH_THEME_TF_PROMPT_SUFFIX="%{$reset_color%}"
+```
+
+## Updating Terraform tools
+
+The plugin comes with a zsh function to update all Terraform tools manually
+
+```shell script
+# From zsh shell
+update_zsh_terraform
 ```
 
 ## License
