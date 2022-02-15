@@ -1,5 +1,18 @@
 # Changelog
 
+<a name="0.2.0"></a>
+## 0.2.0 (2022-02-15)
+
+### Added
+
+- ✨ add install of terraform tools : docs tflint tfsec [[c5baf34](https://github.com/ptavares/zsh-terraform/commit/c5baf34b718b6a291bc1b3eaefa4b2bb870573d0)]
+
+### Fixed
+
+- ✏️ update Readme [[7e85464](https://github.com/ptavares/zsh-terraform/commit/7e854646ab4d58bca0d3969c0f09b1c07a3ed38e)]
+- ✏️ update Readme with new tools [[f896a7a](https://github.com/ptavares/zsh-terraform/commit/f896a7aab5b4e99d521b0b0a6514f7f4b555a9de)]
+
+
 <a name="0.1.0"></a>
 ## 0.1.0 (2021-10-08)
 
