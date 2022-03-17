@@ -1,5 +1,13 @@
 # Changelog
 
+<a name="0.2.2"></a>
+## 0.2.2 (2022-03-17)
+
+### Fixed
+
+- 🐛 resolve triple &amp; [[3e248fa](https://github.com/ptavares/zsh-terraform/commit/3e248faa3a524426bf0fbbfbf33f2001847887b8)]
+
+
 <a name="0.2.1"></a>
 ## 0.2.1 (2022-03-17)
 
