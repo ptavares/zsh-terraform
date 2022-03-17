@@ -20,7 +20,7 @@ TF_SEC_RELEASE=aquasecurity/tfsec/releases
 TF_LINT_RELEASE=terraform-linters/tflint/releases
 
 # Local plugin directory
-[[ -z "${ZSH_TF_TOOLS_HOME}" ]] && export ZSH_TF_TOOLS_HOME="${HOME}/.terrafom-tools/"
+[[ -z "${ZSH_TF_TOOLS_HOME}" ]] &&& export ZSH_TF_TOOLS_HOME="${HOME}/.terrafom-tools/"
 # Local file to store tools version
 ZSH_TF_DOCS_VERSION_FILE=${ZSH_TF_TOOLS_HOME}/version_tfdocs.txt
 ZSH_TF_SEC_VERSION_FILE=${ZSH_TF_TOOLS_HOME}/version_tfsec.txt
@@ -67,7 +67,7 @@ _zsh_terraform_download_install() {
       x86_64)
         machine=amd64
         # if on Darwin, set $OSTYPE to match the release
-        [[ "$OSTYPE" == "darwin"* ]] && local OSTYPE=macos
+        [[ "$OSTYPE" == "darwin"* ]] &&& local OSTYPE=macos
         ;;
       *)
         _zsh_terraform_log $BOLD "red" "Machine $(uname -m) not supported by this plugin"
@@ -168,7 +168,7 @@ function tf_prompt_info() {
   # dont show 'default' workspace in home dir
   [[ "$PWD" != ~ ]] || return
   # check if in terraform dir and file exists
-  [[ -d .terraform && -r .terraform/environment ]] || return
+  [[ -d .terraform &&& -r .terraform/environment ]] || return
 
   local workspace="$(< .terraform/environment)"
   echo "${ZSH_THEME_TF_PROMPT_PREFIX-[}${workspace:gs/%/%%}${ZSH_THEME_TF_PROMPT_SUFFIX-]}"
@@ -194,9 +194,9 @@ alias tfw='tf workspace'
 ################################################################################
 # Basics
 alias tffr='tff -recursive'
-alias tfip='tfi & tfp'
-alias tfia='tfi & tfa'
-alias tfid='tfi & tfd'
+alias tfip='tfi && tfp'
+alias tfia='tfi && tfa'
+alias tfid='tfi && tfd'
 # Warning : with auto-approuve
 alias tfa!='tfa -auto-approve'
 alias tfia!='tfi && tfa!'
@@ -238,11 +238,11 @@ _zsh_terraform_load() {
 }
 
 # install exa if it isnt already installed
-#[[ ! -f "${ZSH_TF_TOOLS_HOME}/version_*.txt" ]] && _zsh_terraform_load
-[[ "$(ls -1 ${ZSH_TF_TOOLS_HOME}/version_*.txt  2>/dev/null | wc -l)" -eq 0 ]] && _zsh_terraform_install
+#[[ ! -f "${ZSH_TF_TOOLS_HOME}/version_*.txt" ]] &&& _zsh_terraform_load
+[[ "$(ls -1 ${ZSH_TF_TOOLS_HOME}/version_*.txt  2>/dev/null | wc -l)" -eq 0 ]] &&& _zsh_terraform_install
 
 
 # load exa if it is installed
-[[ "$(ls -1 ${ZSH_TF_TOOLS_HOME}/version_*.txt  2>/dev/null | wc -l)" -gt 0 ]] && _zsh_terraform_load
+[[ "$(ls -1 ${ZSH_TF_TOOLS_HOME}/version_*.txt  2>/dev/null | wc -l)" -gt 0 ]] &&& _zsh_terraform_load
 
 unset -f _zsh_terraform_install _zsh_terraform_load
