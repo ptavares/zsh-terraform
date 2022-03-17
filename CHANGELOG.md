@@ -1,5 +1,13 @@
 # Changelog
 
+<a name="0.2.1"></a>
+## 0.2.1 (2022-03-17)
+
+### Fixed
+
+- 🐛 resolve alias bug [[8a837b6](https://github.com/ptavares/zsh-terraform/commit/8a837b6ac10c4fb1a5f776ec88dc26e657d618e4)]
+
+
 <a name="0.2.0"></a>
 ## 0.2.0 (2022-02-15)
 
