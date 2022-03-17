@@ -20,7 +20,7 @@ TF_SEC_RELEASE=aquasecurity/tfsec/releases
 TF_LINT_RELEASE=terraform-linters/tflint/releases
 
 # Local plugin directory
-[[ -z "${ZSH_TF_TOOLS_HOME}" ]] &&& export ZSH_TF_TOOLS_HOME="${HOME}/.terrafom-tools/"
+[[ -z "${ZSH_TF_TOOLS_HOME}" ]] && export ZSH_TF_TOOLS_HOME="${HOME}/.terrafom-tools/"
 # Local file to store tools version
 ZSH_TF_DOCS_VERSION_FILE=${ZSH_TF_TOOLS_HOME}/version_tfdocs.txt
 ZSH_TF_SEC_VERSION_FILE=${ZSH_TF_TOOLS_HOME}/version_tfsec.txt
