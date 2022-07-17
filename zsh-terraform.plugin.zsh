@@ -232,7 +232,7 @@ function tfws() {
 # ------------------------------------------------------------------------------
 _zsh_terraform_load_tool() {
     # export PATH if needed
-    local -r plugin_dir=${$1}
+    local -r plugin_dir=$1
     # Add the plugin bin directory path if it doesn't exist in $PATH.
     if [[ -z ${path[(r)$plugin_dir]} ]]; then
         path+=($plugin_dir)
