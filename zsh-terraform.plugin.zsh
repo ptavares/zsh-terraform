@@ -20,7 +20,7 @@ TF_SEC_RELEASE=aquasecurity/tfsec/releases
 TF_LINT_RELEASE=terraform-linters/tflint/releases
 
 # Local plugin directory
-[[ -z "${ZSH_TF_TOOLS_HOME}" ]] && export ZSH_TF_TOOLS_HOME="${HOME}/.terrafom-tools/"
+[[ -z "${ZSH_TF_TOOLS_HOME}" ]] && export ZSH_TF_TOOLS_HOME="${HOME}/.terrafom-tools"
 # Local file to store tools version
 ZSH_TF_DOCS_VERSION_FILE=${ZSH_TF_TOOLS_HOME}/version_tfdocs.txt
 ZSH_TF_SEC_VERSION_FILE=${ZSH_TF_TOOLS_HOME}/version_tfsec.txt
@@ -230,11 +230,20 @@ function tfws() {
 # ------------------------------------------------------------------------------
 # Install and load terraform tools
 # ------------------------------------------------------------------------------
+_zsh_terraform_load_tool() {
+    # export PATH if needed
+    local -r plugin_dir=${$1}
+    # Add the plugin bin directory path if it doesn't exist in $PATH.
+    if [[ -z ${path[(r)$plugin_dir]} ]]; then
+        path+=($plugin_dir)
+    fi      
+}
+
 _zsh_terraform_load() {
     # export PATH
-    export PATH=${PATH}:${ZSH_TF_TOOLS_HOME}/tfdocs
-    export PATH=${PATH}:${ZSH_TF_TOOLS_HOME}/tfsec
-    export PATH=${PATH}:${ZSH_TF_TOOLS_HOME}/tflint
+    _zsh_terraform_load_tool ${ZSH_TF_TOOLS_HOME}/tfdocs
+    _zsh_terraform_load_tool ${ZSH_TF_TOOLS_HOME}/tfsec
+    _zsh_terraform_load_tool ${ZSH_TF_TOOLS_HOME}/tflint
 }
 
 # install exa if it isnt already installed
@@ -245,4 +254,4 @@ _zsh_terraform_load() {
 # load exa if it is installed
 [[ "$(ls -1 ${ZSH_TF_TOOLS_HOME}/version_*.txt  2>/dev/null | wc -l)" -gt 0 ]] && _zsh_terraform_load
 
-unset -f _zsh_terraform_install _zsh_terraform_load
+unset -f _zsh_terraform_install _zsh_terraform_load _zsh_terraform_load_tool
