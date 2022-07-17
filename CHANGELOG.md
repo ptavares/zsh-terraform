@@ -1,5 +1,13 @@
 # Changelog
 
+<a name="0.2.5"></a>
+## 0.2.5 (2022-07-17)
+
+### Fixed
+
+- 🐛 fix local [[732383d](https://github.com/ptavares/zsh-terraform/commit/732383d1019f72f55e4feb111fc11519f0e0716b)]
+
+
 <a name="0.2.4"></a>
 ## 0.2.4 (2022-07-17)
 
