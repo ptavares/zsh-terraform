@@ -1,5 +1,13 @@
 # Changelog
 
+<a name="0.2.4"></a>
+## 0.2.4 (2022-07-17)
+
+### Removed
+
+- 🔥 remove name input [[fce496b](https://github.com/ptavares/zsh-terraform/commit/fce496b506855312eb32e0b39aaa879039dd434f)]
+
+
 <a name="0.2.3"></a>
 ## 0.2.3 (2022-03-17)
 
