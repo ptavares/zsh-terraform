@@ -12,6 +12,7 @@ It will also install and load some useful tools :
 - [terraform-docs](https://github.com/terraform-docs/terraform-docs)
 - [tfsec](https://github.com/aquasecurity/tfsec)
 - [tflint](https://github.com/terraform-linters/tflint)
+- [tfautomv](https://github.com/busser/tfautomv)
 
 ## Table of content
 
