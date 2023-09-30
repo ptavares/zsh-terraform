@@ -1,5 +1,14 @@
 # Changelog
 
+<a name="1.0.0"></a>
+## 1.0.0 (2023-09-30)
+
+### Miscellaneous
+
+-  Merge pull request [#1](https://github.com/ptavares/zsh-terraform/issues/1) from ptavares/feat/add-tfautomv [[9b2e7cc](https://github.com/ptavares/zsh-terraform/commit/9b2e7cc93bee506b52d1bdf8367aa591f75b2dfd)]
+- 🚀 add tfautomv [[d18fbec](https://github.com/ptavares/zsh-terraform/commit/d18fbec32f6caadf522767907823682b4542d2eb)]
+
+
 <a name="0.2.5"></a>
 ## 0.2.5 (2022-07-17)
 
