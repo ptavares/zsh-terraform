@@ -18,6 +18,7 @@ API_GITUB=https://api.github.com/repos
 TF_DOCS_RELEASE=terraform-docs/terraform-docs/releases
 TF_SEC_RELEASE=aquasecurity/tfsec/releases
 TF_LINT_RELEASE=terraform-linters/tflint/releases
+TF_AUTO_MV_RELEASE=busser/tfautomv/releases
 
 # Local plugin directory
 [[ -z "${ZSH_TF_TOOLS_HOME}" ]] && export ZSH_TF_TOOLS_HOME="${HOME}/.terrafom-tools"
@@ -25,6 +26,7 @@ TF_LINT_RELEASE=terraform-linters/tflint/releases
 ZSH_TF_DOCS_VERSION_FILE=${ZSH_TF_TOOLS_HOME}/version_tfdocs.txt
 ZSH_TF_SEC_VERSION_FILE=${ZSH_TF_TOOLS_HOME}/version_tfsec.txt
 ZSH_TF_LINT_VERSION_FILE=${ZSH_TF_TOOLS_HOME}/version_tflint.txt
+ZSH_TF_AUTO_MV_VERSION_FILE=${ZSH_TF_TOOLS_HOME}/version_tfautomv.txt
 
 ################################################################################
 # Install tools Functions
@@ -93,6 +95,12 @@ _zsh_terraform_download_install() {
       rm -rf ${destDir}/tmp.zip
       echo ${version} > ${ZSH_TF_LINT_VERSION_FILE}
       ;;
+    tfautomv)
+      curl -o "${destDir}/tmp.tar.gz" -fsSL https://github.com/${TF_AUTO_MV_RELEASE}/download/${version}/tfautomv_${version:1}_${OSTYPE%-*}_${machine}.tar.gz || (_zsh_terraform_log $BOLD "red" "Error while downloading tfautomv release" ; return)
+      tar xzf ${destDir}/tmp.tar.gz -C ${destDir} 2>&1 > /dev/null
+      rm -rf ${destDir}/tmp.tar.gz
+      echo ${version} > ${ZSH_TF_AUTO_MV_VERSION_FILE}
+      ;;
     *)
       _zsh_terraform_log $BOLD "red" "Unknown tool"
       return 1
@@ -124,6 +132,8 @@ _zsh_terraform_install() {
    _zsh_terraform_install_tool "tfsec" ${TF_SEC_RELEASE}
   # Install tflint
    _zsh_terraform_install_tool "tflint" ${TF_LINT_RELEASE}
+   # Install tfautomv
+    _zsh_terraform_install_tool "tfautomv" ${TF_AUTO_MV_RELEASE}
   _zsh_terraform_log $NONE "blue" "#############################################"
 }
 
@@ -158,6 +168,8 @@ update_zsh_terraform() {
   _update_zsh_terraform_tool "tfsec" ${ZSH_TF_SEC_VERSION_FILE} ${TF_SEC_RELEASE}
   # Update tflint
   _update_zsh_terraform_tool "tflint" ${ZSH_TF_LINT_VERSION_FILE} ${TF_LINT_RELEASE}
+  # Update tfautomv
+  _update_zsh_terraform_tool "tfautomv" ${ZSH_TF_AUTO_MV_VERSION_FILE} ${TF_AUTO_MV_RELEASE}
   _zsh_terraform_log $NONE "blue" "#############################################"
 }
 
@@ -236,7 +248,7 @@ _zsh_terraform_load_tool() {
     # Add the plugin bin directory path if it doesn't exist in $PATH.
     if [[ -z ${path[(r)$plugin_dir]} ]]; then
         path+=($plugin_dir)
-    fi      
+    fi
 }
 
 _zsh_terraform_load() {
@@ -244,14 +256,14 @@ _zsh_terraform_load() {
     _zsh_terraform_load_tool ${ZSH_TF_TOOLS_HOME}/tfdocs
     _zsh_terraform_load_tool ${ZSH_TF_TOOLS_HOME}/tfsec
     _zsh_terraform_load_tool ${ZSH_TF_TOOLS_HOME}/tflint
+    _zsh_terraform_load_tool ${ZSH_TF_TOOLS_HOME}/tfautomv
 }
 
-# install exa if it isnt already installed
-#[[ ! -f "${ZSH_TF_TOOLS_HOME}/version_*.txt" ]] && _zsh_terraform_load
+# install terraform and all tools if it isn't already installed
 [[ "$(ls -1 ${ZSH_TF_TOOLS_HOME}/version_*.txt  2>/dev/null | wc -l)" -eq 0 ]] && _zsh_terraform_install
 
 
-# load exa if it is installed
+# load terraform and all tools if it is installed
 [[ "$(ls -1 ${ZSH_TF_TOOLS_HOME}/version_*.txt  2>/dev/null | wc -l)" -gt 0 ]] && _zsh_terraform_load
 
 unset -f _zsh_terraform_install _zsh_terraform_load _zsh_terraform_load_tool
