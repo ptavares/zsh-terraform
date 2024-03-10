@@ -1,6 +1,6 @@
 ![GitHub](https://img.shields.io/github/license/ptavares/zsh-terraform)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
-![Release](https://img.shields.io/badge/Release_version-1.0.0-blue)
+![Release](https://img.shields.io/badge/Release_version-2.0.0-blue)
 
 # zsh-terraform
 

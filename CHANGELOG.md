@@ -1,5 +1,13 @@
 # Changelog
 
+<a name="2.0.0"></a>
+## 2.0.0 (2024-03-10)
+
+### Breaking changes
+
+- 💥 change tfsec to trivy [[6fd2e11](https://github.com/ptavares/zsh-terraform/commit/6fd2e11259c81cf0b9732f328fdb61087a360372)]
+
+
 <a name="1.0.0"></a>
 ## 1.0.0 (2023-09-30)
 
