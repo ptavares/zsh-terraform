@@ -16,7 +16,7 @@ BOLD="bold"
 NONE="NONE"
 API_GITUB=https://api.github.com/repos
 TF_DOCS_RELEASE=terraform-docs/terraform-docs/releases
-TF_SEC_RELEASE=aquasecurity/tfsec/releases
+TF_TRIVY_RELEASE=aquasecurity/trivy/releases
 TF_LINT_RELEASE=terraform-linters/tflint/releases
 TF_AUTO_MV_RELEASE=busser/tfautomv/releases
 
@@ -24,7 +24,7 @@ TF_AUTO_MV_RELEASE=busser/tfautomv/releases
 [[ -z "${ZSH_TF_TOOLS_HOME}" ]] && export ZSH_TF_TOOLS_HOME="${HOME}/.terrafom-tools"
 # Local file to store tools version
 ZSH_TF_DOCS_VERSION_FILE=${ZSH_TF_TOOLS_HOME}/version_tfdocs.txt
-ZSH_TF_SEC_VERSION_FILE=${ZSH_TF_TOOLS_HOME}/version_tfsec.txt
+ZSH_TF_TRIVY_VERSION_FILE=${ZSH_TF_TOOLS_HOME}/version_trivy.txt
 ZSH_TF_LINT_VERSION_FILE=${ZSH_TF_TOOLS_HOME}/version_tflint.txt
 ZSH_TF_AUTO_MV_VERSION_FILE=${ZSH_TF_TOOLS_HOME}/version_tfautomv.txt
 
@@ -69,7 +69,7 @@ _zsh_terraform_download_install() {
       x86_64)
         machine=amd64
         # if on Darwin, set $OSTYPE to match the release
-        [[ "$OSTYPE" == "darwin"* ]] && local OSTYPE=macos
+        [[ "$OSTYPE" == "darwin"* ]] && local uname -m=macos
         ;;
       *)
         _zsh_terraform_log $BOLD "red" "Machine $(uname -m) not supported by this plugin"
@@ -84,10 +84,14 @@ _zsh_terraform_download_install() {
       rm -rf ${destDir}/*.tar.gz
       echo ${version} > ${ZSH_TF_DOCS_VERSION_FILE}
       ;;
-    tfsec)
-      curl -o "${destDir}/tfsec" -fsSL https://github.com/${TF_SEC_RELEASE}/download/${version}/tfsec-${OSTYPE%-*}-${machine} || (_zsh_terraform_log $BOLD "red" "Error while downloading terraform-docs release" ; return)
-      chmod +x "${destDir}/tfsec"
-      echo ${version} > ${ZSH_TF_SEC_VERSION_FILE}
+    trivy)
+      [[ "$OSTYPE" == "darwin"* ]] && local OS=macOS
+      [[ "$OSTYPE" == "linux"* ]] && local OS=Linux
+      [[ "$machine" == "amd64" ]] && local machine="64bit"
+      curl -o "${destDir}/tmp.tar.gz" -fsSL https://github.com/${TF_TRIVY_RELEASE}/download/${version}/trivy_${version:1}_${OS}-${machine}.tar.gz || (_zsh_terraform_log $BOLD "red" "Error while downloading terraform trivy release" ; return)
+      tar xzf ${destDir}/tmp.tar.gz -C ${destDir} 2>&1 > /dev/null
+      rm -rf ${destDir}/*.tar.gz
+      echo ${version} > ${ZSH_TF_TRIVY_VERSION_FILE}
       ;;
     tflint)
       curl -o "${destDir}/tmp.zip" -fsSL https://github.com/${TF_LINT_RELEASE}/download/${version}/tflint_${OSTYPE%-*}_${machine}.zip || (_zsh_terraform_log $BOLD "red" "Error while downloading terraform-linters release" ; return)
@@ -128,8 +132,8 @@ _zsh_terraform_install() {
   mkdir -p ${ZSH_TF_TOOLS_HOME} || _zsh_terraform_log $NONE "green" "dir already exist"
   # Install tfdocs
   _zsh_terraform_install_tool "tfdocs" ${TF_DOCS_RELEASE}
-  # Install tfsec
-   _zsh_terraform_install_tool "tfsec" ${TF_SEC_RELEASE}
+  # Install trivy
+   _zsh_terraform_install_tool "trivy" ${TF_TRIVY_RELEASE}
   # Install tflint
    _zsh_terraform_install_tool "tflint" ${TF_LINT_RELEASE}
    # Install tfautomv
@@ -164,8 +168,8 @@ update_zsh_terraform() {
   _zsh_terraform_log $BOLD "blue" "Checking new version of Terraform tools..."
    # Update tfdocs
   _update_zsh_terraform_tool "tfdocs" ${ZSH_TF_DOCS_VERSION_FILE} ${TF_DOCS_RELEASE}
-  # Update tfsec
-  _update_zsh_terraform_tool "tfsec" ${ZSH_TF_SEC_VERSION_FILE} ${TF_SEC_RELEASE}
+  # Update trivy
+  _update_zsh_terraform_tool "trivy" ${ZSH_TF_TRIVY_VERSION_FILE} ${TF_TRIVY_RELEASE}
   # Update tflint
   _update_zsh_terraform_tool "tflint" ${ZSH_TF_LINT_VERSION_FILE} ${TF_LINT_RELEASE}
   # Update tfautomv
@@ -254,7 +258,7 @@ _zsh_terraform_load_tool() {
 _zsh_terraform_load() {
     # export PATH
     _zsh_terraform_load_tool ${ZSH_TF_TOOLS_HOME}/tfdocs
-    _zsh_terraform_load_tool ${ZSH_TF_TOOLS_HOME}/tfsec
+    _zsh_terraform_load_tool ${ZSH_TF_TOOLS_HOME}/trivy
     _zsh_terraform_load_tool ${ZSH_TF_TOOLS_HOME}/tflint
     _zsh_terraform_load_tool ${ZSH_TF_TOOLS_HOME}/tfautomv
 }

@@ -10,7 +10,7 @@ This plugins extends original oh-my-zsh plugin with aliases, functions and autoc
 
 It will also install and load some useful tools :
 - [terraform-docs](https://github.com/terraform-docs/terraform-docs)
-- [tfsec](https://github.com/aquasecurity/tfsec)
+- [trivy](https://github.com/aquasecurity/trivy)
 - [tflint](https://github.com/terraform-linters/tflint)
 - [tfautomv](https://github.com/busser/tfautomv)
 
