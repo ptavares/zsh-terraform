@@ -1,5 +1,13 @@
 # Changelog
 
+<a name="2.1.0"></a>
+## 2.1.0 (2024-03-19)
+
+### Fixed
+
+- ✏️ fix typo [[397a75a](https://github.com/ptavares/zsh-terraform/commit/397a75af29240a8154638de200c435387c87f6cc)]
+
+
 <a name="2.0.0"></a>
 ## 2.0.0 (2024-03-10)
 
